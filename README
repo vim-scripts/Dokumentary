@@ -1,0 +1,18 @@
+This is a mirror of http://www.vim.org/scripts/script.php?script_id=5197
+
+GitHub: https://github.com/gastonsimone/vim-dokumentary
+
+Dokumentary improves what the K command does in Vim by customizing its behaviour, depending on the type of file you are editing.
+
+Vim's standard K command for normal mode let's us easily run a program to lookup the keyword under the cursor. The program to run can be customized with the keywordprg (kp) option, whose default option is man.
+
+This presents two problems:
+
+1. The man command is the right choice only if you are writing a shell script or C code.
+2. Vim only runs that command and waits for it to finish to continue using Vim, which sometimes is not the ideal, because you would like to see that documentation at the same time you are editing your file.
+
+Dokumentary solves these two issues by doing the following:
+
+1. It creates buffer-specific mappings for K and Visual-K, depending on the type of file you are editing. See the supported file types below.
+2. It loads the retireved documentation in a vim window, so you can see the documentation together with your file and use all the Vim power to search and copy from it.
+3. The default command is not man, but a system-specific dictionary. So if you are just reading plain text, K will show the definition of the word under the cursor.
