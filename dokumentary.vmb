@@ -1,8 +1,8 @@
 " Vimball Archiver by Charles E. Campbell, Jr., Ph.D.
 UseVimball
 finish
-plugin/dokumentary.vim	[[[1
-195
+bundle/vim-dokumentary/plugin/dokumentary.vim	[[[1
+203
 " dokumentary.vim - Improve what K does
 " Author: Gastón Simone
 
@@ -10,6 +10,10 @@ if exists("g:loaded_dokumentary") || &cp
 	finish
 endif
 let g:loaded_dokumentary = 1
+
+" Configuration {{{1
+let g:dokumentary_open = 'rightbelow 84vnew'
+" }}}1
 
 " Auxiliary functions {{{1
 function! s:get_selected_text()
@@ -85,7 +89,11 @@ function! s:output_to_window(given_keyword, visual, newwindow, type) " {{{1
 
 	if !empty(l:keyword) && executable(split(l:prg)[0])
 		if a:newwindow
-			botright new
+			if exists('g:dokumentary_open') && !empty(g:dokumentary_open)
+				execute g:dokumentary_open
+			else
+				rightbelow 84vnew
+			endif
 			setlocal buftype=nofile
 			set bufhidden=delete
 		else
@@ -198,8 +206,8 @@ augroup END
 " }}}1
 
 " vim:ft=vim foldmethod=marker
-doc/dokumentary.txt	[[[1
-166
+bundle/vim-dokumentary/doc/dokumentary.txt	[[[1
+179
 *dokumentary.txt* Improve what K does.
 
                              DOKUMENTARY
@@ -325,6 +333,19 @@ with the "dict" command. You can also install other dictionaries if you like.
 If present in the system, Dokumentary will use "dict" and will search on all
 the available dictionaries at once. See the next section to know how to
 change this.
+
+                                                     *g:dokumentary_open*
+Documentation window location                 *dokumentary-cfg-docwindow*
+
+The location of the documentation window can be customized by changing the
+'g:dokumentary_open' variable. This variable contains the |ex|-mode command
+that will be executed to create a new window for documentation. The default
+value is
+
+    rightbelow 84vnew
+
+See the documentation for |rightbelow| and |vnew| to understand what this
+command does and how to change it to your own preferences.
 
 Documentation commands                         *dokumentary-cfg-commands*
 
